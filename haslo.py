@@ -40,7 +40,7 @@ def Zapisz():
 
 def Koniec(Nazwa):
     WygHaslo = wynik.get()
-    file = open('/home/xray/Desktop/programowanie/geek.txt', 'a')
+    file = open('/home/xray/Desktop/programowanie/hasla.txt', 'a')
     if WygHaslo != '':
         file.write(Nazwa + ": " + WygHaslo + '\n')
     else:file.close()
