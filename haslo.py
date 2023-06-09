@@ -28,9 +28,9 @@ def GenerujHaslo():
 
 def Zapisz():
     WygHaslo = wynik.get()
-    file = open('geek.txt', 'a')
+    file = open('/home/xray/Desktop/programowanie/geek.txt', 'a')
     if WygHaslo != '':
-        file.write(WygHaslo + '\n')2
+        file.write(WygHaslo + '\n')
     else:file.close()
 
 root = Tk()
