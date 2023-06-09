@@ -27,15 +27,28 @@ def GenerujHaslo():
     wynik.set(haslo)
 
 def Zapisz():
+    login = StringVar()
+    WygHaslo = wynik.get()
+    if WygHaslo != '':
+        newWindow = Toplevel(frm)
+        newWindow.title("New Window")
+        newWindow.geometry("310x50")
+        newWindow.title("Wprowadz nazwe hasła")
+        Entry(newWindow, width=30, textvariable=login).grid(column=0, row=0, padx=5, sticky=W)
+        Button(newWindow, text ="Zapisz", height=2, command= lambda: [Koniec(login.get()), newWindow.destroy()]).grid(column=1, row=0, pady=5, padx=5)
+    
+
+def Koniec(Nazwa):
     WygHaslo = wynik.get()
     file = open('/home/xray/Desktop/programowanie/geek.txt', 'a')
     if WygHaslo != '':
-        file.write(WygHaslo + '\n')
+        file.write(Nazwa + ": " + WygHaslo + '\n')
     else:file.close()
 
 root = Tk()
 frm = ttk.Frame(root, padding=15)
 frm.grid()
+root.title("Generator haseł")
 
 ttk.Label(frm, text="Czy chcesz użyć znaków specjalnych?", width=34, font=('', 15)).grid(column=0, row=0)
 ttk.Label(frm, text="Czy chcesz użyć liczb 0-9?", width=34, font=('', 15)).grid(column=0, row=1)
