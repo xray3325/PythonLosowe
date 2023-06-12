@@ -6,6 +6,7 @@ import time
 alfabet = ['0','1','2','3','4','5','6','7','8','9','a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'w', 'y', 'z','!','@','#','$','%','*','&','?']
 
 driver = webdriver.Chrome("chromedriver")
+driver.maximize_window()
 
 def Generuj():
     imie = GenerujImNaNi()
@@ -13,9 +14,8 @@ def Generuj():
     nick = GenerujImNaNi()
     haslo = GenerujHaslo()
     dzien = random.randrange(1,28)
-    miesiac = random.randrange(1,12)
     rok = random.randrange(1960,2000)
-    Utworz(imie, nazwisko, nick, haslo, dzien, miesiac, rok)
+    Utworz(imie, nazwisko, nick, haslo, dzien, rok)
 
 def GenerujImNaNi():
     wynik = []
@@ -27,14 +27,41 @@ def GenerujImNaNi():
 
 def GenerujHaslo():
     haslo = []
-    i = random.randrange(20,28)
+    i = random.randrange(18,24)
     while 0 < i:
         if random.randint(0,1) == 0: haslo.append(alfabet[random.randrange(0,41)]); haslo.append(alfabet[random.randrange(0,41)].capitalize())
         i -= 1
     return(''.join(haslo))
 
-def Utworz(imie, nazwisko, nick, haslo, dzien, miesiac, rok):
+def Utworz(imie, nazwisko, nick, haslo, dzien, rok):
     driver.get('https://konto-pocztowe.interia.pl/#/nowe-konto/darmowe')
-    driver.find_element(By.CLASS_NAME, '_2E5n5j0h7xvs07').send_keys(imie)
+    time.sleep(0.5)
+    driver.find_element(By.XPATH, '/html/body/div[3]/div[2]/button[3]').click()
+    time.sleep(0.3)
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[1]/input').send_keys(imie)
+    time.sleep(0.3)
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[2]/input').send_keys(nazwisko)
+    time.sleep(0.3)
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[3]/div[1]/input').send_keys(dzien)
+    time.sleep(0.3)
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[3]/div[3]/input').send_keys(rok)
+    time.sleep(0.3)
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[5]/div[1]/input').send_keys(nick)
+    time.sleep(0.3)
+    driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(haslo)
+    time.sleep(0.3)
+    driver.find_element(By.XPATH, '//*[@id="rePassword"]').send_keys(haslo)
+    time.sleep(0.3)
+    driver.find_element(By.CLASS_NAME, 'icon-arrow-right-full').click()
+    time.sleep(0.3)
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[3]/div[2]/ul/li[6]/span[1]').click()
+    time.sleep(0.3)
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[4]/div[2]').click()
+    time.sleep(0.3)
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[4]/ul/li[1]/span[1]').click()
+    time.sleep(0.3)
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[2]/div[1]/div[1]/label/div/div').click()
+    time.sleep(0.3)
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[2]/button').click()
 
 Generuj()
