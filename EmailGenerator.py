@@ -61,13 +61,14 @@ def Utworz(imie, nazwisko, haslo, dzien, rok):
     time.sleep(0.3)
     driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[2]/div[1]/div[1]/label/div/div').click()
     time.sleep(0.3)
-    #driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[2]/button').click()
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[2]/button').click()
+
     ZapisaneKonta(imie, nazwisko, haslo)
 
 def ZapisaneKonta(imie, nazwisko, haslo):
-    nick = '%s.%s' % (imie, nazwisko)
+    login = '%s.%s' % (imie, nazwisko)
     file = open('/home/xray/Desktop/programowanie/KontaInteria.txt', 'a')
-    file.write('nick: ' + nick + ' haslo: ' + haslo + '\n')
+    file.write('login: ' + login + ' haslo: ' + haslo + '\n')
     file.close()
 
 Generuj()
