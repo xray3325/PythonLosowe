@@ -11,11 +11,10 @@ driver.maximize_window()
 def Generuj():
     imie = GenerujImNaNi()
     nazwisko = GenerujImNaNi()
-    nick = GenerujImNaNi()
     haslo = GenerujHaslo()
     dzien = random.randrange(1,28)
     rok = random.randrange(1960,2000)
-    Utworz(imie, nazwisko, nick, haslo, dzien, rok)
+    Utworz(imie, nazwisko, haslo, dzien, rok)
 
 def GenerujImNaNi():
     wynik = []
@@ -33,7 +32,7 @@ def GenerujHaslo():
         i -= 1
     return(''.join(haslo))
 
-def Utworz(imie, nazwisko, nick, haslo, dzien, rok):
+def Utworz(imie, nazwisko, haslo, dzien, rok):
     driver.get('https://konto-pocztowe.interia.pl/#/nowe-konto/darmowe')
     time.sleep(0.5)
     driver.find_element(By.XPATH, '/html/body/div[3]/div[2]/button[3]').click()
@@ -46,7 +45,7 @@ def Utworz(imie, nazwisko, nick, haslo, dzien, rok):
     time.sleep(0.3)
     driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[3]/div[3]/input').send_keys(rok)
     time.sleep(0.3)
-    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[5]/div[1]/input').send_keys(nick)
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[5]/div[1]/input').send_keys()
     time.sleep(0.3)
     driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(haslo)
     time.sleep(0.3)
@@ -62,6 +61,13 @@ def Utworz(imie, nazwisko, nick, haslo, dzien, rok):
     time.sleep(0.3)
     driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[2]/div[1]/div[1]/label/div/div').click()
     time.sleep(0.3)
-    driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[2]/button').click()
+    #driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[2]/button').click()
+    ZapisaneKonta(imie, nazwisko, haslo)
+
+def ZapisaneKonta(imie, nazwisko, haslo):
+    nick = '%s.%s' % (imie, nazwisko)
+    file = open('/home/xray/Desktop/programowanie/KontaInteria.txt', 'a')
+    file.write('nick: ' + nick + ' haslo: ' + haslo + '\n')
+    file.close()
 
 Generuj()
