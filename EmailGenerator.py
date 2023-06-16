@@ -34,7 +34,7 @@ def GenerujHaslo():
 
 def Utworz(imie, nazwisko, haslo, dzien, rok):
     driver.get('https://konto-pocztowe.interia.pl/#/nowe-konto/darmowe')
-    time.sleep(0.5)
+    time.sleep(3)
     driver.find_element(By.XPATH, '/html/body/div[3]/div[2]/button[3]').click()
     time.sleep(0.3)
     driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[1]/input').send_keys(imie)
